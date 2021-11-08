@@ -40,12 +40,14 @@ if(isset($_POST['email']))
 
   <body>
 
+    <script src="validationSignup.js" type="text/javascript"></script>
+
     <div class="container">
     	<div class="header">
     		<h2>Signup</h2>
     	</div>
 
-    	<form class="form" id="form" method="POST" action="signup.php" >
+    	<form class="form" id="form" method="POST" onsubmit="return checkInputs()" action="signup.php" >
 
         <div class="form-control ">
           <label >Username</label>
