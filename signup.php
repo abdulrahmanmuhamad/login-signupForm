@@ -1,3 +1,32 @@
+<?php
+
+$host='localhost';
+$user='root';
+$DBpassword='';
+$db='lab1_DB';
+
+$con = mysqli_connect($host,$user,$DBpassword);
+mysqli_select_db($con,$db);
+
+session_start();
+
+if(isset($_POST['email']))
+{
+    $email=$_POST['email'];
+    $name=$_POST['name'];
+    $password=md5($password);
+
+    $sql="INSERT INTO user (email,name,password) VALUES ('".$email."','".$name."','".$password."')";
+
+    if(mysqli_query($con, $sql)){
+        $_SESSION['name']=$name;
+        header('location: Hi.php');
+    } else{
+        echo "ERROR: Could't be able to execute this file $sql. " . mysqli_error($con);
+    }
+
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -16,7 +45,7 @@
     		<h2>Signup</h2>
     	</div>
 
-    	<form class="form" id="form" method="$ POST" action="Hi.php" >
+    	<form class="form" id="form" method="POST" action="signup.php" >
 
         <div class="form-control ">
           <label >Username</label>
@@ -54,42 +83,11 @@
           <small>Error message</small>
         </div>
 
-      	<button>Submit</button>
+      	<button type="submit" >Submit</button>
 
       </form>
 
     </div>
 
-<script src="validationSignup.js" type="text/javascript"></script>
-
   </body>
 </html>
-<?php
-
-$host='localhost';
-$user='root';
-$DBpassword='';
-$db='lab1_DB';
-
-$con = mysqli_connect($host,$user,$DBpassword);
-mysqli_select_db($con,$db);
-
-session_start();
-
-if(isset($_POST['email']))
-{
-    $email=$_post['email'];
-    $name=$_post['name'];
-    $password=md5($password);
-
-    $sql="INSERT INTO users (email,name,password) VALUES ('".$email."','".$name."','".$password."')";
-
-    if(mysqli_query($con, $sql)){
-        $_SESSION['name']=$name;
-        header('location: Hi.php');
-    } else{
-        echo "ERROR: Could't be able to execute this file $sql. " . mysqli_error($con);
-    }
-
-  }
-?>

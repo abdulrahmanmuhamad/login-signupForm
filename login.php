@@ -1,19 +1,20 @@
 <?php
-$host="localhost";
-$user="root";
-$password=" ";
-$db="lab1_DB";
 
-Mysql_connect($host,$user,$password);
-mysql_select_db($db);
+$host='localhost';
+$user='root';
+$DBpassword='';
+$db='lab1_DB';
+
+$con = mysqli_connect($host,$user,$DBpassword);
+mysqli_select_db($con,$db);
 
 session_start();
 
 if(isset($_POST['email'])){
 
-    $email=$_post['email'];
+    $email=$_POST['email'];
     $password=md5($password);
-    $sql="select * from users where email='".$email."' AND password='".$password."' limit 1";
+    $sql="select * from user where email='".$email."' AND password='".$password."' limit 1";
 
     $result = mysqli_query($con,$sql);
 
@@ -30,6 +31,7 @@ if(isset($_POST['email'])){
             preventDefault();
             </script>";
     }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,7 @@ if(isset($_POST['email'])){
     		<h2>Login to your Account</h2>
     	</div>
 
-    	<form class="form" id="form" method="$ POST" action="#" >
+    	<form class="form" id="form" method="POST" action="Hi.php" >
 
       	<div class="form-control ">
     			<label >Email</label>
@@ -71,13 +73,11 @@ if(isset($_POST['email'])){
     		</div>
 
 
-      	<button>Submit</button>
+      	<button type="submit">Submit</button>
 
       </form>
 
     </div>
-
-<script src="validationLogin.js" type="text/javascript"></script>
 
   </body>
 </html>
