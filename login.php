@@ -21,7 +21,7 @@ if(isset($_POST['email'])){
         $row = mysqli_fetch_array($result);
         $name = $row['name'];
         $_SESSION['name']=$name;
-        header('location: HI.php');
+        header('location: Hi.php');
     }
     else{
         echo "
