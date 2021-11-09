@@ -1,18 +1,19 @@
-
     const form = document.getElementById('form');
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
+    let username = document.getElementById('name');
+    let password = document.getElementById('password');
+    let emailFlag=false;
+    let passwordFlag=false;
 
     form.addEventListener('submit', e => {
-    	e.preventDefault();
-
-    	checkInputs();
-    });
+      if(checkInputs()==false)
+        e.preventDefault();
+      }
+      });
 
     function checkInputs() {
     	// trim to remove the whitespaces
-      const emailValue = email.value.trim();
-    	const passwordValue = password.value.trim();
+      const emailValue = email.value;
+    	const passwordValue = password.value;
 
       if(emailValue === '') {
     		setErrorFor(email, 'Email cannot be blank');
@@ -20,14 +21,16 @@
     		setErrorFor(email, 'Not a valid email');
     	} else {
     		setSuccessFor(email);
+        emailFlag=true;
     	}
 
     	if(passwordValue === '') {
     		setErrorFor(password, 'Password cannot be blank');
     	} else {
     		setSuccessFor(password);
+        emailFlag=true;
     	}
-
+      return emailFlag&passwordFlag;
     }
 
     function setErrorFor(input, message) {

@@ -10,10 +10,10 @@ mysqli_select_db($con,$db);
 
 session_start();
 
-if(isset($_POST['email'])){
+if(isset($_POST['email']) ){
 
     $email=$_POST['email'];
-    $password=md5($password);
+    $password=md5($_POST['password']);
     $sql="select * from user where email='".$email."' AND password='".$password."' limit 1";
 
     $result = mysqli_query($con,$sql);
@@ -38,27 +38,24 @@ if(isset($_POST['email'])){
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>login</title>
 
 	<link rel="stylesheet" href="mainStyle.css">
 
   </head>
-
   <body>
-
     <div class="container">
     	<div class="header">
     		<h2>Login to your Account</h2>
     	</div>
 
-    	<form class="form" id="form" method="POST" action="Hi.php" >
+    	<form class="form" id="form" method="POST" onsubmit="return checkInputs()" action="#" >
+
 
       	<div class="form-control ">
     			<label >Email</label>
     			<input type="text" placeholder="Enter your Email"
-           id="Email" name="Email" />
-    			<i class="fas fa-check-circle"></i>
-    			<i class="fas fa-exclamation-circle"></i>
+           id="Email" name="email" />
     			<small>Error message</small>
     		</div>
 
@@ -66,18 +63,15 @@ if(isset($_POST['email'])){
       	<div class="form-control">
     			<label >Password</label>
     			<input type="password" placeholder="Password"
-          id="password" id="password"/>
-    			<i class="fas fa-check-circle"></i>
-    			<i class="fas fa-exclamation-circle"></i>
+          id="password" id="password" name="password"/>
     			<small>Error message</small>
     		</div>
 
-
       	<button type="submit">Submit</button>
-
       </form>
-
     </div>
+
+    <script src="validationLogin.js" type="text/javascript"></script>
 
   </body>
 </html>

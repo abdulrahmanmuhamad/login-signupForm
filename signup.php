@@ -14,9 +14,17 @@ if(isset($_POST['email']))
 {
     $email=$_POST['email'];
     $name=$_POST['name'];
-    $password=md5($password);
+    $password=md5($_POST['password']);
 
     $sql="INSERT INTO user (email,name,password) VALUES ('".$email."','".$name."','".$password."')";
+    $query = mysqli_query($con,"select * from user where email = '$email'");
+    $res = mysqli_fetch_row($query);
+    if($res){
+      echo "
+          <script type=\"text/javascript\">
+          alert('Email already exists');
+          preventDefault();
+          </script>";}
 
     if(mysqli_query($con, $sql)){
         $_SESSION['name']=$name;
@@ -32,15 +40,12 @@ if(isset($_POST['email']))
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>signup</title>
 
 	<link rel="stylesheet" href="mainStyle.css">
 
   </head>
-
   <body>
-
-    <script src="validationSignup.js" type="text/javascript"></script>
 
     <div class="container">
     	<div class="header">
@@ -52,7 +57,7 @@ if(isset($_POST['email']))
         <div class="form-control ">
           <label >Username</label>
           <input type="text" name="name" placeholder="Enter your username"
-           id="username" />
+           id="name" />
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error message</small>
@@ -88,8 +93,7 @@ if(isset($_POST['email']))
       	<button type="submit" >Submit</button>
 
       </form>
-
     </div>
-
+    <script src="validationSignup.js" type="text/javascript"></script>
   </body>
 </html>

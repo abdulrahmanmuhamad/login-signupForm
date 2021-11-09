@@ -3,7 +3,11 @@
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let password2 = document.getElementById('password2');
-    let flag=false;
+    let nameFlag=false;
+    let emailFlag=false;
+    let passwordFlag=false;
+    let password2Flag=false;
+
     form.addEventListener('submit', e => {
     	if(checkInputs()==false)
       {
@@ -22,7 +26,7 @@
     		setErrorFor(username, 'Username cannot be blank');
     	} else {
     		setSuccessFor(username);
-        flag=true;
+        nameFlag=true;
     	}
 
     	if(emailValue === '') {
@@ -31,14 +35,14 @@
     		setErrorFor(email, 'Not a valid email');
     	} else {
     		setSuccessFor(email);
-        flag=true;
+        emailFlag=true;
       }
 
     	if(passwordValue === '') {
     		setErrorFor(password, 'Password cannot be blank');
     	} else {
     		setSuccessFor(password);
-        flag=true;
+        passwordFlag=true;
       }
 
     	if(password2Value === '') {
@@ -47,8 +51,9 @@
     		setErrorFor(password2, 'Passwords does not match');
     	} else{
     		setSuccessFor(password2);
-        flag=true;
+        password2Flag=true;
       }
+      return nameFlag&emailFlag&passwordFlag&password2Flag;
     }
 
     function setErrorFor(input, message) {
